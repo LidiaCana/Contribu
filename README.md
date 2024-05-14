@@ -32,7 +32,7 @@ To get started with Contribu, follow the steps below:
 1. Clone this repo & install dependencies
 
    ```sh
-   git clone https://github.com/contribu/contribu.git
+   git clone https://github.com/ContribuDev/Contribu.git
    cd contribu
    yarn install
    ```
@@ -78,4 +78,4 @@ To know more about its features, check out our [website](https://contribu.io).
 
 We welcome contributions to Contribu!
 
-Please see [CONTRIBUTING.MD](https://github.com/contribu/contribu/blob/main/CONTRIBUTING.md) for more information and guidelines for contributing to Contribu.
+Please see [CONTRIBUTING.MD](https://github.com/ContribuDev/Contribu/blob/main/CONTRIBUTING.md) for more information and guidelines for contributing to Contribu.
