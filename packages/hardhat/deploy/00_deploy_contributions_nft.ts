@@ -22,12 +22,20 @@ const deployContributionsNFT: DeployFunction = async function (hre: HardhatRunti
   const { deployer } = await hre.getNamedAccounts();
   const { deploy } = hre.deployments;
 
+  await deploy("ContribuData", {
+    from: deployer,
+    log: true,
+  });
+  const contribuData = await hre.ethers.getContract<Contract>("ContribuData", deployer);
+  console.log("ContribuData Address:", await contribuData.getAddress());
+
   await deploy("ContributionsNFT", {
     from: deployer,
     // Contract constructor arguments
     args: [
       "0x4200000000000000000000000000000000000021",
       "0x4200000000000000000000000000000000000020",
+      contribuData.getAddress(),
       "Contributions NFT",
       "CNFT",
     ],
@@ -40,7 +48,7 @@ const deployContributionsNFT: DeployFunction = async function (hre: HardhatRunti
 
   // Get the deployed contract to interact with it after deploying.
   const contributionsNFT = await hre.ethers.getContract<Contract>("ContributionsNFT", deployer);
-  console.log("👋 Contract Address:", await contributionsNFT.getAddress());
+  console.log("Contributions NFT Address:", await contributionsNFT.getAddress());
 };
 
 export default deployContributionsNFT;

@@ -67,9 +67,14 @@ contract ContributionsNFT is ERC721 {
     ContribuData contribuData;
 
     // Contructor
-    constructor(address _eas, address _schemaRegistry, string memory _NFTName, string memory _NFTSymbol) ERC721(_NFTName, _NFTSymbol) {
+    constructor(address _eas,
+            address _schemaRegistry,
+            address contribuDataAddress,
+            string memory _NFTName,
+            string memory _NFTSymbol) ERC721(_NFTName, _NFTSymbol) {
         eas = _eas;
         schemaRegistry = _schemaRegistry;
+        contribuData = ContribuData(contribuDataAddress);
         operators[msg.sender] = true;      
     }
 
