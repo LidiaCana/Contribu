@@ -8,7 +8,7 @@ import { Contract } from "ethers";
  *
  * @param hre HardhatRuntimeEnvironment object.
  */
-const deployContributionsNFT: DeployFunction = async function (hre: HardhatRuntimeEnvironment) {
+const deployContribuData: DeployFunction = async function (hre: HardhatRuntimeEnvironment) {
   /*
     On localhost, the deployer account is the one that comes with Hardhat, which is already funded.
 
@@ -22,12 +22,13 @@ const deployContributionsNFT: DeployFunction = async function (hre: HardhatRunti
   const { deployer } = await hre.getNamedAccounts();
   const { deploy } = hre.deployments;
 
+  console.log("Deploying ContribuData contract 🚀");
   await deploy("ContribuData", {
     from: deployer,
     log: true,
   });
   const contribuData = await hre.ethers.getContract<Contract>("ContribuData", deployer);
-  console.log("ContribuData Address:", await contribuData.getAddress());
+  console.log("🚀 ContribuData deployed at:", await contribuData.getAddress());
 
   await deploy("ContributionsNFT", {
     from: deployer,
@@ -35,7 +36,7 @@ const deployContributionsNFT: DeployFunction = async function (hre: HardhatRunti
     args: [
       "0x4200000000000000000000000000000000000021",
       "0x4200000000000000000000000000000000000020",
-      contribuData.getAddress(),
+      await contribuData.getAddress(),
       "Contributions NFT",
       "CNFT",
     ],
@@ -48,11 +49,11 @@ const deployContributionsNFT: DeployFunction = async function (hre: HardhatRunti
 
   // Get the deployed contract to interact with it after deploying.
   const contributionsNFT = await hre.ethers.getContract<Contract>("ContributionsNFT", deployer);
-  console.log("Contributions NFT Address:", await contributionsNFT.getAddress());
+  console.log("🚀 ContributionsNFT deployed at:", await contributionsNFT.getAddress());
 };
 
-export default deployContributionsNFT;
+export default deployContribuData;
 
 // Tags are useful if you have multiple deploy files and only want to run one of them.
 // e.g. yarn deploy --tags YourContract
-deployContributionsNFT.tags = ["ContributionsNFT"];
+deployContribuData.tags = ["ContribuData"];
