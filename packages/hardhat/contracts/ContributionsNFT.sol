@@ -1,13 +1,59 @@
 // SPDX-License-Identifier: MIT
 
-pragma solidity 0.8.23;
+pragma solidity ^0.8.23;
 
 import { IEAS, AttestationRequest, AttestationRequestData, RevocationRequest, RevocationRequestData } from "@ethereum-attestation-service/eas-contracts/contracts/IEAS.sol";
 import { ISchemaRegistry, SchemaRecord, ISchemaResolver } from "@ethereum-attestation-service/eas-contracts/contracts/ISchemaRegistry.sol";
 import { NO_EXPIRATION_TIME, EMPTY_UID } from "@ethereum-attestation-service/eas-contracts/contracts/Common.sol";
 import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
+import {Ownable} from "@openzeppelin/contracts/access/Ownable.sol";
+
+contract ContribuData is Ownable {
+    mapping(uint nftId => mapping(uint8 contributionType => uint timestamp)) public contributionTimestamps;
+    mapping(uint nftId => mapping(uint8 contributionType => uint amount)) public contributionAmounts;
+    mapping(uint id => string name) contributionTypes;
+
+    address public contribuAddress;
+    
+    // Getters
+    function getContributionTimestamps(uint nftId, uint8 contributionType) public view returns(uint timestamp) {
+        return contributionTimestamps[nftId][contributionType];
+    }
+    function getContributionAmounts(uint nftId, uint8 contributionType) public view returns(uint amount) {
+        return contributionAmounts[nftId][contributionType];
+    }
+    function getContributionTypes(uint id) public view returns(string memory name) {
+        return contributionTypes[id];
+    }
+
+    // Setters
+    function setContributionTimestamps(uint nftId, uint8 contributionType, uint timestamp) public onlyContribu {
+        contributionTimestamps[nftId][contributionType] = timestamp;
+    }
+    function setContributionAmounts(uint nftId, uint8 contributionType, uint amount) public onlyContribu {
+        contributionAmounts[nftId][contributionType] = amount;
+    }
+    function setContributionTypes(uint id, string memory name) public onlyContribu {
+        contributionTypes[id] = name;
+    }
+
+    // Owner
+    function setContribuAddress(address contribuAddress_) public {
+        contribuAddress = contribuAddress_;
+    }
+
+    // Modifiers
+    modifier onlyContribu() {
+        require(msg.sender == contribuAddress, "Caller is not Contribu");
+        _;
+    }
+}
 
 contract ContributionsNFT is ERC721 {
+    // Scroll
+    //address public eas = 0x310359aBD92081b2a9F3ef347858708089B633d5;
+    //address public schemaRegistry = 0xf3f4BDc8C7498208256a47bb1C5fB308CDe67c3E;
+    // OP
     address public eas = 0x4200000000000000000000000000000000000021;
     address public schemaRegistry = 0x4200000000000000000000000000000000000020;
     bytes32 public schemaID;
@@ -18,14 +64,17 @@ contract ContributionsNFT is ERC721 {
 
     string public baseTokenURI;
 
-    mapping(uint nftId => mapping(uint8 contributionType => uint timestamp)) public contributionTimestamps;
-    mapping(uint nftId => mapping(uint8 contributionType => uint amount)) public contributionAmounts;
-    mapping(uint id => string name) contributionTypes;
+    ContribuData contribuData;
 
     // Contructor
-    constructor(address _eas, address _schemaRegistry, string memory _NFTName, string memory _NFTSymbol) ERC721(_NFTName, _NFTSymbol) {
+    constructor(address _eas,
+            address _schemaRegistry,
+            address contribuDataAddress,
+            string memory _NFTName,
+            string memory _NFTSymbol) ERC721(_NFTName, _NFTSymbol) {
         eas = _eas;
         schemaRegistry = _schemaRegistry;
+        contribuData = ContribuData(contribuDataAddress);
         operators[msg.sender] = true;      
     }
 
@@ -35,17 +84,6 @@ contract ContributionsNFT is ERC721 {
         _;
     }
 
-    function getEAS() public view returns(address){
-        return eas;
-    }
-
-    function registrySchema() public onlyOperator {
-        schemaID = ISchemaRegistry(schemaRegistry).register(
-            "address from, uint nftID, string contributionType, uint8 amount, string description_8",
-            ISchemaResolver(address(0)),
-            true);
-    }
-
     // onlyOperator functions
     function setOperator(address operator, bool value) public onlyOperator {
         operators[operator] = value;
@@ -53,6 +91,10 @@ contract ContributionsNFT is ERC721 {
 
     function setBaseURI(string memory baseURI) public onlyOperator {
         baseTokenURI = baseURI;
+    }
+
+    function setContribuData(address contribuDataAddress) public onlyOperator {
+        contribuData = ContribuData(contribuDataAddress);
     }
 
     function mint(address to) public onlyOperator
@@ -74,12 +116,14 @@ contract ContributionsNFT is ERC721 {
         ) public onlyOperator returns(bytes32)
     {
         require(contributionAmount <= maxContributionAmount, "Invalid contribution amount");
-        contributionAmounts[nftId][contributionTypeId] = getContribution(nftId, contributionTypeId) + contributionAmount;
-        contributionTimestamps[nftId][contributionTypeId] = block.timestamp;
+        contribuData.setContributionAmounts(nftId, contributionTypeId,
+            getContribution(nftId, contributionTypeId) + contributionAmount);
+        contribuData.setContributionTimestamps(nftId, contributionTypeId,
+            block.timestamp);
 
         uint64 expirationTime = uint64(block.timestamp + contributionDecayTime*contributionAmount);
 
-        bytes memory encodedData = abi.encode(msg.sender, nftId, contributionTypes[contributionTypeId], contributionAmount, description);
+        bytes memory encodedData = abi.encode(msg.sender, nftId, contribuData.getContributionTypes(contributionTypeId), contributionAmount, description);
         return
             IEAS(eas).attest(
                 AttestationRequest({
@@ -103,12 +147,14 @@ contract ContributionsNFT is ERC721 {
         ) public onlyOperator returns(bytes32)
     {
         require(contributionAmount <= maxContributionAmount, "Invalid contribution amount");
-        contributionAmounts[nftId][contributionTypeId] = getContribution(nftId, contributionTypeId) + contributionAmount;
-        contributionTimestamps[nftId][contributionTypeId] = block.timestamp;
+        contribuData.setContributionAmounts(nftId, contributionTypeId,
+            getContribution(nftId, contributionTypeId) + contributionAmount);
+        contribuData.setContributionTimestamps(nftId, contributionTypeId,
+            block.timestamp);
 
         uint64 expirationTime = uint64(block.timestamp + contributionDecayTime*contributionAmount);
 
-        bytes memory encodedData = abi.encode(msg.sender, nftId, contributionTypes[contributionTypeId], contributionAmount, "");
+        bytes memory encodedData = abi.encode(msg.sender, nftId, contribuData.getContributionTypes(contributionTypeId), contributionAmount, "");
         return
             IEAS(eas).attest(
                 AttestationRequest({
@@ -182,15 +228,16 @@ contract ContributionsNFT is ERC721 {
     }
 
     function setContributionType(uint id, string memory name) onlyOperator public {
-        contributionTypes[id] = name;
+        contribuData.setContributionTypes(id,
+            name);
     }
 
     // View functions
 
     function getContribution(uint nftId, uint8 contributionTypeId) public view returns(uint)
     {
-        uint lastContributionTimestamp = contributionTimestamps[nftId][contributionTypeId];
-        uint lastContributionAmount = contributionAmounts[nftId][contributionTypeId];
+        uint lastContributionTimestamp = contribuData.getContributionTimestamps(nftId, contributionTypeId);
+        uint lastContributionAmount = contribuData.getContributionAmounts(nftId, contributionTypeId);
         uint elapsedTimeSinceLastContribution = block.timestamp - lastContributionTimestamp;
         uint contributionDecay = elapsedTimeSinceLastContribution / contributionDecayTime;
         if(lastContributionAmount < contributionDecay)
