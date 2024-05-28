@@ -36,6 +36,7 @@ const deployContribuData: DeployFunction = async function (hre: HardhatRuntimeEn
     args: [
       "0x4200000000000000000000000000000000000021",
       "0x4200000000000000000000000000000000000020",
+      "0x6d31aea5da7ef46bfaf9b2842fd5013fb1db5a46a24c855b361dbdee1f855573",
       await contribuData.getAddress(),
       "Contributions NFT",
       "CNFT",
@@ -50,6 +51,10 @@ const deployContribuData: DeployFunction = async function (hre: HardhatRuntimeEn
   // Get the deployed contract to interact with it after deploying.
   const contributionsNFT = await hre.ethers.getContract<Contract>("ContributionsNFT", deployer);
   console.log("🚀 ContributionsNFT deployed at:", await contributionsNFT.getAddress());
+
+  console.log("Setting the contribu address on the data contract...");
+  await contribuData.setContribuAddress(await contributionsNFT.getAddress());
+  console.log("Contribu address was set, contribu us ready!");
 };
 
 export default deployContribuData;
