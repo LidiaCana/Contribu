@@ -8,7 +8,7 @@ import { Contract } from "ethers";
  *
  * @param hre HardhatRuntimeEnvironment object.
  */
-const deployContributionsNFT: DeployFunction = async function (hre: HardhatRuntimeEnvironment) {
+const deployContribuData: DeployFunction = async function (hre: HardhatRuntimeEnvironment) {
   /*
     On localhost, the deployer account is the one that comes with Hardhat, which is already funded.
 
@@ -22,12 +22,22 @@ const deployContributionsNFT: DeployFunction = async function (hre: HardhatRunti
   const { deployer } = await hre.getNamedAccounts();
   const { deploy } = hre.deployments;
 
+  console.log("Deploying ContribuData contract 🚀");
+  await deploy("ContribuData", {
+    from: deployer,
+    log: true,
+  });
+  const contribuData = await hre.ethers.getContract<Contract>("ContribuData", deployer);
+  console.log("🚀 ContribuData deployed at:", await contribuData.getAddress());
+
   await deploy("ContributionsNFT", {
     from: deployer,
     // Contract constructor arguments
     args: [
       "0x4200000000000000000000000000000000000021",
       "0x4200000000000000000000000000000000000020",
+      "0x6d31aea5da7ef46bfaf9b2842fd5013fb1db5a46a24c855b361dbdee1f855573",
+      await contribuData.getAddress(),
       "Contributions NFT",
       "CNFT",
     ],
@@ -40,11 +50,15 @@ const deployContributionsNFT: DeployFunction = async function (hre: HardhatRunti
 
   // Get the deployed contract to interact with it after deploying.
   const contributionsNFT = await hre.ethers.getContract<Contract>("ContributionsNFT", deployer);
-  console.log("👋 Contract Address:", await contributionsNFT.getAddress());
+  console.log("🚀 ContributionsNFT deployed at:", await contributionsNFT.getAddress());
+
+  console.log("Setting the contribu address on the data contract...");
+  await contribuData.setContribuAddress(await contributionsNFT.getAddress());
+  console.log("Contribu address was set, contribu us ready!");
 };
 
-export default deployContributionsNFT;
+export default deployContribuData;
 
 // Tags are useful if you have multiple deploy files and only want to run one of them.
 // e.g. yarn deploy --tags YourContract
-deployContributionsNFT.tags = ["ContributionsNFT"];
+deployContribuData.tags = ["ContribuData"];

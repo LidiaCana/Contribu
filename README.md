@@ -61,6 +61,22 @@ To get started with Contribu, follow the steps below:
 
    Visit your app on: `http://localhost:3000`. You can interact with your smart contract using the `Debug Contracts` page. You can tweak the app config in `packages/nextjs/scaffold.config.ts`.
 
+## Testing the contracts
+
+Due to EAS dependency, forking is necesary for running the tests:
+
+```
+yarn fork --fork YOUR_NETWORK_URL
+```
+
+Now open another terminal and run.
+
+```
+yarn test-localhost
+```
+
+Note: very generous RPC is needed to run the tests. Otherwise you will get `429 too many requests`. Alchemy is recomended.
+
 **What's next**:
 
 - Edit your smart contract `YourContract.sol` in `packages/hardhat/contracts`
@@ -79,3 +95,11 @@ To know more about its features, check out our [website](https://contribu.io).
 We welcome contributions to Contribu!
 
 Please see [CONTRIBUTING.MD](https://github.com/ContribuDev/Contribu/blob/main/CONTRIBUTING.md) for more information and guidelines for contributing to Contribu.
+
+## Notes
+
+### Verification for not supported Chains
+
+```sh
+yarn verify --api-url https://api-sepolia-optimistic.etherscan.io
+```
