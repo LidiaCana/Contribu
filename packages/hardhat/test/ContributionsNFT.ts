@@ -27,7 +27,15 @@ describe("ContributionsNFT", function () {
 
   describe("Deployment", function () {
     it("Should be able to set contribution", async function () {
+      // Contribution types setup
+      await contributionsNFT.setContributionType(0, "Logistica");
+      await contributionsNFT.setContributionType(1, "Marketing");
+      await contributionsNFT.setContributionType(2, "Impartidor de conocimiento");
+      await contributionsNFT.setContributionType(3, "Patrocinador");
+      await contributionsNFT.setContributionTypesAmount(4);
+      // NFT minting
       await contributionsNFT.mint("0xdD2FD4581271e230360230F9337D5c0430Bf44C0");
+      // Attesting contributions
       await contributionsNFT.setContribution("1", "1", "5", "Just testing");
       //expect(await contributionsNFT.greeting()).to.equal("Building Unstoppable Apps!!!");
     });

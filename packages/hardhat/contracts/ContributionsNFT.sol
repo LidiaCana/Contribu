@@ -12,6 +12,7 @@ contract ContribuData is Ownable {
     mapping(uint nftId => mapping(uint8 contributionType => uint timestamp)) public contributionTimestamps;
     mapping(uint nftId => mapping(uint8 contributionType => uint amount)) public contributionAmounts;
     mapping(uint id => string name) contributionTypes;
+    uint public contributionTypesAmount;
 
     address public contribuAddress;
     
@@ -22,8 +23,19 @@ contract ContribuData is Ownable {
     function getContributionAmounts(uint nftId, uint8 contributionType) public view returns(uint amount) {
         return contributionAmounts[nftId][contributionType];
     }
-    function getContributionTypes(uint id) public view returns(string memory name) {
+    function getContributionType(uint id) public view returns(string memory name) {
         return contributionTypes[id];
+    }
+    function getContributionTypesAmount() public view returns(uint) {
+        return contributionTypesAmount;
+    }
+    function getContributionTypesIds() public view returns(uint[] memory) {
+        uint[] memory ids = new uint[](contributionTypesAmount);
+        for(uint i=0; i<contributionTypesAmount; i++)
+        {
+            ids[i] = i;
+        }
+        return ids;
     }
 
     // Setters
@@ -33,8 +45,11 @@ contract ContribuData is Ownable {
     function setContributionAmounts(uint nftId, uint8 contributionType, uint amount) public onlyContribu {
         contributionAmounts[nftId][contributionType] = amount;
     }
-    function setContributionTypes(uint id, string memory name) public onlyContribu {
+    function setContributionType(uint id, string memory name) public onlyContribu {
         contributionTypes[id] = name;
+    }
+    function setContributionTypesAmount(uint _contributionTypesAmount) public onlyContribu {
+        contributionTypesAmount = _contributionTypesAmount;
     }
 
     // Owner
@@ -125,7 +140,7 @@ contract ContributionsNFT is ERC721 {
 
         uint64 expirationTime = uint64(block.timestamp + contributionDecayTime*contributionAmount);
 
-        bytes memory encodedData = abi.encode(msg.sender, nftId, contribuData.getContributionTypes(contributionTypeId), contributionAmount, description);
+        bytes memory encodedData = abi.encode(msg.sender, nftId, contribuData.getContributionType(contributionTypeId), contributionAmount, description);
         return
             IEAS(eas).attest(
                 AttestationRequest({
@@ -156,7 +171,7 @@ contract ContributionsNFT is ERC721 {
 
         uint64 expirationTime = uint64(block.timestamp + contributionDecayTime*contributionAmount);
 
-        bytes memory encodedData = abi.encode(msg.sender, nftId, contribuData.getContributionTypes(contributionTypeId), contributionAmount, "");
+        bytes memory encodedData = abi.encode(msg.sender, nftId, contribuData.getContributionType(contributionTypeId), contributionAmount, "");
         return
             IEAS(eas).attest(
                 AttestationRequest({
@@ -230,8 +245,11 @@ contract ContributionsNFT is ERC721 {
     }
 
     function setContributionType(uint id, string memory name) onlyOperator public {
-        contribuData.setContributionTypes(id,
-            name);
+        contribuData.setContributionType(id,name);
+    }
+
+    function setContributionTypesAmount(uint contributionTypesAmount) onlyOperator public {
+        contribuData.setContributionTypesAmount(contributionTypesAmount);
     }
 
     // View functions
@@ -258,6 +276,22 @@ contract ContributionsNFT is ERC721 {
             resultArray[i] = getContribution(nftId, contributionTypeIds[i]);
         }
         return resultArray;
+    }
+
+    function getContributionTimestamps(uint nftId, uint8 contributionType) public view returns(uint timestamp) {
+        return contribuData.getContributionTimestamps(nftId, contributionType);
+    }
+    function getContributionAmounts(uint nftId, uint8 contributionType) public view returns(uint amount) {
+        return contribuData.getContributionAmounts(nftId, contributionType);
+    }
+    function getContributionType(uint id) public view returns(string memory name) {
+        return contribuData.getContributionType(id);
+    }
+    function getContributionTypesAmount() public view returns(uint) {
+        return contribuData.getContributionTypesAmount();
+    }
+    function getContributionTypesIds() public view returns(uint[] memory) {
+        return contribuData.getContributionTypesIds();
     }
 
     // Internal functions
