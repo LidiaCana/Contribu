@@ -6,8 +6,271 @@ import { GenericContractsDeclaration } from "~~/utils/scaffold-eth/contract";
 
 const deployedContracts = {
   11155420: {
+    ContribuData: {
+      address: "0x87DFa5646f097F52448A93f273AB835974d72643",
+      abi: [
+        {
+          anonymous: false,
+          inputs: [
+            {
+              indexed: true,
+              internalType: "address",
+              name: "previousOwner",
+              type: "address",
+            },
+            {
+              indexed: true,
+              internalType: "address",
+              name: "newOwner",
+              type: "address",
+            },
+          ],
+          name: "OwnershipTransferred",
+          type: "event",
+        },
+        {
+          inputs: [],
+          name: "contribuAddress",
+          outputs: [
+            {
+              internalType: "address",
+              name: "",
+              type: "address",
+            },
+          ],
+          stateMutability: "view",
+          type: "function",
+        },
+        {
+          inputs: [
+            {
+              internalType: "uint256",
+              name: "nftId",
+              type: "uint256",
+            },
+            {
+              internalType: "uint8",
+              name: "contributionType",
+              type: "uint8",
+            },
+          ],
+          name: "contributionAmounts",
+          outputs: [
+            {
+              internalType: "uint256",
+              name: "amount",
+              type: "uint256",
+            },
+          ],
+          stateMutability: "view",
+          type: "function",
+        },
+        {
+          inputs: [
+            {
+              internalType: "uint256",
+              name: "nftId",
+              type: "uint256",
+            },
+            {
+              internalType: "uint8",
+              name: "contributionType",
+              type: "uint8",
+            },
+          ],
+          name: "contributionTimestamps",
+          outputs: [
+            {
+              internalType: "uint256",
+              name: "timestamp",
+              type: "uint256",
+            },
+          ],
+          stateMutability: "view",
+          type: "function",
+        },
+        {
+          inputs: [
+            {
+              internalType: "uint256",
+              name: "nftId",
+              type: "uint256",
+            },
+            {
+              internalType: "uint8",
+              name: "contributionType",
+              type: "uint8",
+            },
+          ],
+          name: "getContributionAmounts",
+          outputs: [
+            {
+              internalType: "uint256",
+              name: "amount",
+              type: "uint256",
+            },
+          ],
+          stateMutability: "view",
+          type: "function",
+        },
+        {
+          inputs: [
+            {
+              internalType: "uint256",
+              name: "nftId",
+              type: "uint256",
+            },
+            {
+              internalType: "uint8",
+              name: "contributionType",
+              type: "uint8",
+            },
+          ],
+          name: "getContributionTimestamps",
+          outputs: [
+            {
+              internalType: "uint256",
+              name: "timestamp",
+              type: "uint256",
+            },
+          ],
+          stateMutability: "view",
+          type: "function",
+        },
+        {
+          inputs: [
+            {
+              internalType: "uint256",
+              name: "id",
+              type: "uint256",
+            },
+          ],
+          name: "getContributionTypes",
+          outputs: [
+            {
+              internalType: "string",
+              name: "name",
+              type: "string",
+            },
+          ],
+          stateMutability: "view",
+          type: "function",
+        },
+        {
+          inputs: [],
+          name: "owner",
+          outputs: [
+            {
+              internalType: "address",
+              name: "",
+              type: "address",
+            },
+          ],
+          stateMutability: "view",
+          type: "function",
+        },
+        {
+          inputs: [],
+          name: "renounceOwnership",
+          outputs: [],
+          stateMutability: "nonpayable",
+          type: "function",
+        },
+        {
+          inputs: [
+            {
+              internalType: "address",
+              name: "contribuAddress_",
+              type: "address",
+            },
+          ],
+          name: "setContribuAddress",
+          outputs: [],
+          stateMutability: "nonpayable",
+          type: "function",
+        },
+        {
+          inputs: [
+            {
+              internalType: "uint256",
+              name: "nftId",
+              type: "uint256",
+            },
+            {
+              internalType: "uint8",
+              name: "contributionType",
+              type: "uint8",
+            },
+            {
+              internalType: "uint256",
+              name: "amount",
+              type: "uint256",
+            },
+          ],
+          name: "setContributionAmounts",
+          outputs: [],
+          stateMutability: "nonpayable",
+          type: "function",
+        },
+        {
+          inputs: [
+            {
+              internalType: "uint256",
+              name: "nftId",
+              type: "uint256",
+            },
+            {
+              internalType: "uint8",
+              name: "contributionType",
+              type: "uint8",
+            },
+            {
+              internalType: "uint256",
+              name: "timestamp",
+              type: "uint256",
+            },
+          ],
+          name: "setContributionTimestamps",
+          outputs: [],
+          stateMutability: "nonpayable",
+          type: "function",
+        },
+        {
+          inputs: [
+            {
+              internalType: "uint256",
+              name: "id",
+              type: "uint256",
+            },
+            {
+              internalType: "string",
+              name: "name",
+              type: "string",
+            },
+          ],
+          name: "setContributionTypes",
+          outputs: [],
+          stateMutability: "nonpayable",
+          type: "function",
+        },
+        {
+          inputs: [
+            {
+              internalType: "address",
+              name: "newOwner",
+              type: "address",
+            },
+          ],
+          name: "transferOwnership",
+          outputs: [],
+          stateMutability: "nonpayable",
+          type: "function",
+        },
+      ],
+      inheritedFunctions: {},
+    },
     ContributionsNFT: {
-      address: "0x41A46a6510F2B6a347b947e635172fD74DbF625f",
+      address: "0xD205F2f23b5BE5FC0c10f828071123008682ce9E",
       abi: [
         {
           inputs: [
@@ -19,6 +282,11 @@ const deployedContracts = {
             {
               internalType: "address",
               name: "_schemaRegistry",
+              type: "address",
+            },
+            {
+              internalType: "address",
+              name: "contribuDataAddress",
               type: "address",
             },
             {
@@ -174,60 +442,12 @@ const deployedContracts = {
           type: "function",
         },
         {
-          inputs: [
-            {
-              internalType: "uint256",
-              name: "nftId",
-              type: "uint256",
-            },
-            {
-              internalType: "uint8",
-              name: "contributionType",
-              type: "uint8",
-            },
-          ],
-          name: "contributionAmounts",
-          outputs: [
-            {
-              internalType: "uint256",
-              name: "amount",
-              type: "uint256",
-            },
-          ],
-          stateMutability: "view",
-          type: "function",
-        },
-        {
           inputs: [],
           name: "contributionDecayTime",
           outputs: [
             {
               internalType: "uint256",
               name: "",
-              type: "uint256",
-            },
-          ],
-          stateMutability: "view",
-          type: "function",
-        },
-        {
-          inputs: [
-            {
-              internalType: "uint256",
-              name: "nftId",
-              type: "uint256",
-            },
-            {
-              internalType: "uint8",
-              name: "contributionType",
-              type: "uint8",
-            },
-          ],
-          name: "contributionTimestamps",
-          outputs: [
-            {
-              internalType: "uint256",
-              name: "timestamp",
               type: "uint256",
             },
           ],
@@ -309,19 +529,6 @@ const deployedContracts = {
               internalType: "uint256[]",
               name: "",
               type: "uint256[]",
-            },
-          ],
-          stateMutability: "view",
-          type: "function",
-        },
-        {
-          inputs: [],
-          name: "getEAS",
-          outputs: [
-            {
-              internalType: "address",
-              name: "",
-              type: "address",
             },
           ],
           stateMutability: "view",
@@ -480,13 +687,6 @@ const deployedContracts = {
           type: "function",
         },
         {
-          inputs: [],
-          name: "registrySchema",
-          outputs: [],
-          stateMutability: "nonpayable",
-          type: "function",
-        },
-        {
           inputs: [
             {
               internalType: "bytes32",
@@ -603,6 +803,19 @@ const deployedContracts = {
             },
           ],
           name: "setBaseURI",
+          outputs: [],
+          stateMutability: "nonpayable",
+          type: "function",
+        },
+        {
+          inputs: [
+            {
+              internalType: "address",
+              name: "contribuDataAddress",
+              type: "address",
+            },
+          ],
+          name: "setContribuData",
           outputs: [],
           stateMutability: "nonpayable",
           type: "function",
@@ -860,18 +1073,9 @@ const deployedContracts = {
         },
       ],
       inheritedFunctions: {
-        approve: "@openzeppelin/contracts/token/ERC721/ERC721.sol",
-        balanceOf: "@openzeppelin/contracts/token/ERC721/ERC721.sol",
-        getApproved: "@openzeppelin/contracts/token/ERC721/ERC721.sol",
-        isApprovedForAll: "@openzeppelin/contracts/token/ERC721/ERC721.sol",
-        name: "@openzeppelin/contracts/token/ERC721/ERC721.sol",
-        ownerOf: "@openzeppelin/contracts/token/ERC721/ERC721.sol",
-        safeTransferFrom: "@openzeppelin/contracts/token/ERC721/ERC721.sol",
-        setApprovalForAll: "@openzeppelin/contracts/token/ERC721/ERC721.sol",
-        supportsInterface: "@openzeppelin/contracts/token/ERC721/ERC721.sol",
-        symbol: "@openzeppelin/contracts/token/ERC721/ERC721.sol",
-        tokenURI: "@openzeppelin/contracts/token/ERC721/ERC721.sol",
-        transferFrom: "@openzeppelin/contracts/token/ERC721/ERC721.sol",
+        owner: "@openzeppelin/contracts/access/Ownable.sol",
+        renounceOwnership: "@openzeppelin/contracts/access/Ownable.sol",
+        transferOwnership: "@openzeppelin/contracts/access/Ownable.sol",
       },
     },
   },

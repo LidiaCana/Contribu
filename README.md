@@ -79,3 +79,11 @@ To know more about its features, check out our [website](https://contribu.io).
 We welcome contributions to Contribu!
 
 Please see [CONTRIBUTING.MD](https://github.com/ContribuDev/Contribu/blob/main/CONTRIBUTING.md) for more information and guidelines for contributing to Contribu.
+
+## Notes
+
+### Verification for not supported Chains
+
+```sh
+yarn verify --api-url https://api-sepolia-optimistic.etherscan.io
+```

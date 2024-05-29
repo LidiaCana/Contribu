@@ -1,51 +1,63 @@
-// import { readContract } from "@wagmi/core";
-// import scaffoldConfig from "~~/scaffold.config";
-// import { getTargetNetworks } from "~~/utils/scaffold-eth";
-// import { AbiFunctionReturnType, ContractAbi, contracts } from "~~/utils/scaffold-eth/contract";
+import { readContract } from "@wagmi/core";
+import scaffoldConfig from "~~/scaffold.config";
+import { wagmiConfig } from "~~/services/web3/wagmiConfig";
+import { AbiFunctionReturnType, ContractAbi, contracts } from "~~/utils/scaffold-eth/contract";
 
-// type ContributionsNFTAbi = ContractAbi<"ContributionsNFT">;
+type ContributionsNFTAbi = ContractAbi<"ContributionsNFT">;
 
-// type contributionsReturnType = AbiFunctionReturnType<ContributionsNFTAbi, "ceremonies">;
+type contributionNFTReturnType = AbiFunctionReturnType<ContributionsNFTAbi, "ownerOf">;
 
-// type contributionsCountReturnType = AbiFunctionReturnType<ContributionsNFTAbi, "tokenCount">;
+type contributionNFTCountReturnType = AbiFunctionReturnType<ContributionsNFTAbi, "tokenCount">;
 
-// const deployedContract = contracts?.[scaffoldConfig.targetNetworks[0].contracts.["ContributionsNFT"];
+const deployedContract = contracts?.[scaffoldConfig.targetNetworks[0].id]?.["ContributionsNFT"];
 
-// export async function FetchCeremony(index: bigint) {
-//   if (deployedContract?.address !== undefined && deployedContract?.abi !== undefined) {
-//     const data = await readContract({
-//       chainId: getTargetNetworks().id,
-//       address: deployedContract?.address,
-//       abi: deployedContract?.abi,
-//       functionName: "getContribution",
-//       args: [index],
-//     });
-//     return data as contributionsReturnType;
-//   }
-// }
+export async function FetchContributionNFTOwner(index: bigint) {
+  if (deployedContract?.address !== undefined && deployedContract?.abi !== undefined) {
+    const data = await readContract(wagmiConfig, {
+      functionName: "ownerOf",
+      args: [index],
+      address: deployedContract?.address,
+      abi: deployedContract?.abi,
+    });
+    return data as contributionNFTReturnType;
+  }
+}
 
-// export default async function getAllCeremonies() {
-//   const allCeremonies = [];
-//   if (deployedContract?.address !== undefined && deployedContract?.abi !== undefined) {
-//     try {
-//       const result = await readContract({
-//         chainId: getTargetNetworks().id,
-//         address: deployedContract?.address,
-//         abi: deployedContract?.abi,
-//         functionName: "ceremonyCount",
-//       });
+export async function FetchTotalContributionNFT() {
+  if (deployedContract?.address !== undefined && deployedContract?.abi !== undefined) {
+    const data = await readContract(wagmiConfig, {
+      functionName: "tokenCount",
+      address: deployedContract?.address,
+      abi: deployedContract?.abi,
+    });
+    return data as contributionNFTCountReturnType;
+  }
+}
 
-//       const ceremonyCount = result as contributionsCountReturnType;
+export default async function getAllContributionNFT(apiString: string) {
+  const allContributionNFT = [];
+  if (deployedContract?.address !== undefined && deployedContract?.abi !== undefined) {
+    try {
+      const contributionNFTCount = await FetchTotalContributionNFT();
 
-//       if (ceremonyCount !== undefined && typeof ceremonyCount === "bigint") {
-//         for (let i = 0n; i < ceremonyCount; i++) {
-//           const ceremonyData = await FetchCeremony(i);
-//           allCeremonies.push(ceremonyData);
-//         }
-//         return allCeremonies;
-//       }
-//     } catch (error) {
-//       console.error("Error reading ceremonyCount", error);
-//     }
-//   }
-// }
+      if (contributionNFTCount !== undefined && typeof contributionNFTCount === "bigint") {
+        for (let i = 1n; i <= contributionNFTCount; i++) {
+          const contributionNFTOnwer = await FetchContributionNFTOwner(i);
+          if (contributionNFTOnwer !== undefined) {
+            // const strRequest = "https://todosland.xyz/" + i;apiString
+            const strRequest = apiString + i;
+            const nftDetails = await fetch(strRequest);
+            if (nftDetails !== undefined && nftDetails.ok) {
+              const response = await nftDetails.json();
+              const nftResponse = { ...response, nftOwner: contributionNFTOnwer };
+              allContributionNFT.push(nftResponse);
+            }
+          }
+        }
+        return allContributionNFT;
+      }
+    } catch (error) {
+      console.error("Error reading contributionNFT", error);
+    }
+  }
+}
