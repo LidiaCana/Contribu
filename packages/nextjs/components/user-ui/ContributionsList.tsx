@@ -6,7 +6,8 @@ import ContribuCard from "./ContributionCard";
 import getAllContributionNFT from "~~/utils/contribu/getAllContributionsNFTs";
 
 export const ContributionsList = () => {
-  const api = "https://todosland.xyz/";
+  // const api0 = "https://159.223.195.92/";
+  const api = "https://contribu.xyz/";
   const router = useRouter();
   const [contributions, setContributions] = useState<any[]>([]);
 
