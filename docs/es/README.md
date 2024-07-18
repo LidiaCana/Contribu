@@ -1,10 +1,45 @@
 # 🏗 Contribu
 
-## 🤔 Que es Contribu ?
+## 🤔 Que es Contribu?
 
-🧪 Contribu is an open-source NFT project aimed at creating a community cooperation system where community members are recognized for the amount of contributions that are currently impacting and helping their community grow. Contribu leverages Ethereum Attestation Services (EAS) to verify and reward member contributions. Its algorithm is designed to help communities recognize member contributions through dynamic NFTs that evolve based on mutable points accumulated over time.
+🧪 Contribu es un proyecto de código abierto de NFT cuyo objetivo es crear un sistema de cooperación comunitaria en donde los miembros de las comunidades tengan reconocimiento por la cantidad de aportaciones que actualmente están impactando y ayudando a su comunidad a crecer.
 
-## What we resolve?
+👾 Contribu aprovecha los Servicios de Atestación de Ethereum (EAS) para verificar y recompensar las contribuciones de los miembros. Su algoritmo está diseñado para ayudar a las comunidades a reconocer las contribuciones de los miembros a través de NFT dinámicas que evolucionan en función de puntos acumulados mutables a través del tiempo.
+
+## Que resolvemos?
+
+Hemos observado que en muchas comunidades la participación de sus miembros es muy activa cuando un proyecto está comenzando. Las personas están muy inspiradas y entusiasmadas por contribuir. Sin embargo, a medida que pasa el tiempo, los miembros pierden interés y la participación que mantenía viva a la comunidad se va apagando.
+
+### Resolvemos dos puntos importantes:
+
+1. Con nuestro sistema de reconocimiento de NFT dinámicas, incentivamos a los miembros a continuar participando continuamente para que su estatus como contribuidor prevalezca, impulsando el sentido de colaboración de cada miembro.
+2. La equidad de voz y voto basada en la actividad y colaboraciones de los miembros.
+
+## Como funciona?
+
+Para lograr nuestro objetivo de fomentar una cultura constantemente cooperativa en las comunidades de blockchain nos basamos en la siguiente dinamica:
+
+Los miembros de una comunidad tendran un NFT dinamico (establecido por los administradores de dicha comunidad) que cambiara en base a una medicion de puntos que representa las contribuciones que cada miembro ha realizado.
+
+Si en un largo periodo de tiempo (Determinado por los admin de la comunida) se detecta inactividad de el integrante, el algoritmo comenzara a bajar puntos de participacion a esta persona. Y el NFT mutara para ajustarse a la cantidad de puntos.
+
+Consideraciones:
+
+### Colección PFP
+
+Los organizadores de la comunidad pueden crear su propia Colección Contribu. Cada colección es un contrato NFT compatible con ERC 721 lanzado en la cadena de su elección. Cada NFT representa las contribuciones específicas de un individuo dentro de la comunidad.
+
+### Puntos dinámicos
+
+Las contribuciones se segmentan en tipos y los organizadores comunitarios tienen la libertad de elegir categorías que reflejen los valores de su comunidad. Las personas pueden acumular puntos contribuyendo a la comunidad, y estos puntos son visibles en todos los mercados y visualizadores de NFT.
+
+### Sistema de caída de puntos (mecánica Anti OG)
+
+Contribu encuentra un equilibrio entre recompensar tanto a los originales como a los recién llegados mediante la implementación de una función de caída automática. Esta función reduce gradualmente los puntos a lo largo del tiempo, favoreciendo las contribuciones continuas sobre las grandes realizadas en el pasado lejano.
+
+La fórmula de puntos dinámicos se calcula en cadena, lo que permite que otros contratos se conecten con Contribu para consultar puntos. Esta característica abre la puerta a módulos de gobernanza, lanzamientos aéreos y accesos especiales.
+
+Fórmula de desintegración en cadena:
 
 ## Case uses and examples.
 
