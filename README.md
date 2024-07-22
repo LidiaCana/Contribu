@@ -65,7 +65,7 @@ To know more about its features, check out our [website](https://contribu.io). -
 
 ## For Developers
 
-- [Developers](/docs/en/development/overview.md)
+- [Developers](/docs/en/development)
 - - [Quick Start](/docs/en/development/quick%20start.md)
 - - [Custom FE](/docs/en/development/frontend/README.md)
 - - [API](/docs/en/development/backend/READNE.md)
