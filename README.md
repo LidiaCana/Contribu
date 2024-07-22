@@ -5,3 +5,4 @@
 3. [How Contribu Works?](docs/en/README.md#how-does-it-work)
 4. [Features](docs/en/README.md#features)
 5. [Uses Cases](docs/en/README.md#)
+6. [Core Concepts](/docs/en/core%20concepts.md)
