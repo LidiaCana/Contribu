@@ -36,3 +36,7 @@ The solidity smart contract is compatible with the ERC721 standard and Ethereum 
 ```sh
 yarn verify --api-url https://api-sepolia-optimistic.etherscan.io
 ```
+
+[Quick Start Guide ->](quick-start.md)
+
+[How can be a Contribu ->](/CONTRIBUTING.md)

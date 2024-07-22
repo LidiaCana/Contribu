@@ -20,7 +20,13 @@ We have observed that in many communities, members' participation is very active
 
 To achieve our goal of fostering a culture of constant cooperation in blockchain communities, we rely on the following dynamics:
 
-Community members will have a dynamic NFT (set by the community administrators) that will change based on a points measurement representing each member's contributions.
+#### Initial setup
+
+Community organizers can create their own Contribu Collection. Each collection is an ERC 721 compatible NFT contract launched in the chain of their choice. Each NFT represents the specific contributions of an individual within the community.
+
+#### Mechanism
+
+Community members will have a dynamic NFT that will change based on a points measurement representing each member's contributions.
 
 If a member is inactive for a long period (determined by the community admins), the algorithm will start to deduct participation points from that person, and the NFT will mutate to adjust to the number of points.
 
@@ -49,11 +55,11 @@ In a DAO, where members contribute by voting, proposing initiatives or participa
 
 A collective of digital artists wants to recognize collaborations and contributions within their community. Contribu can award dynamic NFTs to artists who collaborate on joint projects, participate in community events, or contribute to community promotion.
 
-## Documentation
+<!-- ## Documentation
 
 Visit our [docs](https://docs.contribu.io) to learn how to start building with Contribu.
 
-To know more about its features, check out our [website](https://contribu.io).
+To know more about its features, check out our [website](https://contribu.io). -->
 
 ## Contributing to Contribu
 
