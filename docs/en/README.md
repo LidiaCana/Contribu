@@ -12,9 +12,9 @@ We have observed that in many communities, members' participation is very active
 
 #### We solve three important points:
 
-- 💪 Motivation: Dynamic NFTs motivate members to stay active and keep contributing, as their status and recognition are directly related to their participation.
-- ✅ Transparency and Verification: Contribu uses EAS to ensure that contributions are verified fairly and transparently.
-- ⚖️ Equity in Governance: By basing votes on activity and contributions, Contribu ensures that decisions are made by the most committed members.
+- Motivation: Dynamic NFTs motivate members to stay active and keep contributing, as their status and recognition are directly related to their participation.
+- Transparency and Verification: Contribu uses EAS to ensure that contributions are verified fairly and transparently.
+- Equity in Governance: By basing votes on activity and contributions, Contribu ensures that decisions are made by the most committed members.
 
 ## How does it work?
 
@@ -29,8 +29,6 @@ Community organizers can create their own Contribu Collection. Each collection i
 Community members will have a dynamic NFT that will change based on a points measurement representing each member's contributions.
 
 If a member is inactive for a long period (determined by the community admins), the algorithm will start to deduct participation points from that person, and the NFT will mutate to adjust to the number of points.
-
-[Read More ->](/docs/en/core%20concepts.md)
 
 ## Features
 
@@ -62,13 +60,6 @@ A collective of digital artists wants to recognize collaborations and contributi
 Visit our [docs](https://docs.contribu.io) to learn how to start building with Contribu.
 
 To know more about its features, check out our [website](https://contribu.io). -->
-
-## For Developers
-
-- [Developers](/docs/en/development)
-- - [Quick Start](/docs/en/development/quick%20start.md)
-- - [Custom FE](/docs/en/development/frontend/README.md)
-- - [API](/docs/en/development/backend/READNE.md)
 
 ## Contributing to Contribu
 
