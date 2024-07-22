@@ -2,9 +2,11 @@
 
 Contribu is designed to leverage modern technologies for optimal performance, scalability, and user experience. The core components of this architecture include Solidity for smart contract development, Node.js for the metadata API backend, and React for the frontend. The solidity smart contract is compatible with the ERC721 standard and Ethereum Attestation Service. The Node.js API allows the dynamic NFT metadata.
 
-| Smart Contract | Solidity |
-| Backend | Node js|
-| Frontend | React |
+| Technology Area | Stack    |
+| --------------- | -------- |
+| Smart Contract  | Solidity |
+| Backend         | Node js  |
+| Frontend        | React    |
 
 JSON API that servers ERC-721 compatible metadata for an NFT collection on the blockchain.
 
