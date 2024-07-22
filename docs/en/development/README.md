@@ -29,6 +29,23 @@ The solidity smart contract is compatible with the ERC721 standard and Ethereum 
 | OP      | `0x8d5cDc7d6cABc13bf982F3c39f3FA5bcaC7Da59b` | `0x6d31aea5da7ef46bfaf9b2842fd5013fb1db5a46a24c855b361dbdee1f855573` |
 | Scroll  | `0xC361DAb6B8D2BD50B252EAb774b3AF83d156Bd50` |                                                                      |
 
+## Networks pre-configured
+
+- sepolia
+- arbitrum
+- arbitrumSepolia
+- optimism
+- optimismSepolia
+- polygon
+- polygonMumbai
+- polygonZkEvm
+- polygonZkEvmTestnet
+- gnosis
+- chiado
+- scroll
+
+\*\* If the network you are looking for is not here you can add new network settings [Read More](/packages/hardhat/hardhat.config.ts)
+
 ## Notes
 
 ### Verification for not supported Chains
