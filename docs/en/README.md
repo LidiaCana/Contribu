@@ -35,16 +35,16 @@ If a member is inactive for a long period (determined by the community admins), 
 | Governance module                  | ❌  | ✅  |
 | Admin Panel                        | ❌  | ✅  |
 
-## Casos de uso y ejemplos:
+## Use cases:
 
-#### Proyectos de Código Abierto:
+#### Open Source Projects:
 
 Imaginemos un proyecto de código abierto quiere incentivar a sus desarrolladores y colaboradores a seguir contribuyendo. Contribu puede recompensar a estos miembros con NFTs dinámicas que reflejan sus contribuciones, incentivándolos a seguir activos.
 
 #### DAOs:
 
-En una DAO, donde los miembros contribuyen votando, proponiendo iniciativas o participando en la gobernanza. Las contribuciones de los miembros se reconocen con NFT, lo que podría otorgar poder de voto adicional o acceso a foros especiales.
+In a DAO, where members contribute by voting, proposing initiatives or participating in governance. Member contributions are recognized with NFTs, which could grant additional voting power or access to special forums.
 
-#### Comunidades Creativas:
+#### Creative Communities:
 
-Un colectivo de artistas digitales quiere reconocer las colaboraciones y contribuciones dentro de su comunidad. Contribu puede otorgar NFTs dinámicas a los artistas que colaboran en proyectos conjuntos, participen en eventos comunitarios o contribuyan a la promoción de la comunidad.
+A collective of digital artists wants to recognize collaborations and contributions within their community. Contribu can award dynamic NFTs to artists who collaborate on joint projects, participate in community events, or contribute to community promotion.
