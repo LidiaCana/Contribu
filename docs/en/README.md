@@ -48,3 +48,15 @@ In a DAO, where members contribute by voting, proposing initiatives or participa
 #### Creative Communities:
 
 A collective of digital artists wants to recognize collaborations and contributions within their community. Contribu can award dynamic NFTs to artists who collaborate on joint projects, participate in community events, or contribute to community promotion.
+
+## Documentation
+
+Visit our [docs](https://docs.contribu.io) to learn how to start building with Contribu.
+
+To know more about its features, check out our [website](https://contribu.io).
+
+## Contributing to Contribu
+
+We welcome contributions to Contribu!
+
+Please see [CONTRIBUTING.MD](https://github.com/ContribuDev/Contribu/blob/main/CONTRIBUTING.md) for more information and guidelines for contributing to Contribu.
